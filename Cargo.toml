@@ -12,6 +12,7 @@ curve25519-dalek = "1"
 hex = "0.3"
 rand = "0.6"
 sha3 = "0.8"
+cryptonight = "0.1.0"
 
 [badges]
 travis-ci = { repository = "cryptonote-rust/crypto", branch = "master" }

@@ -2,6 +2,9 @@ use std::fmt;
 
 use sha3::{Digest, Keccak256Full};
 
+use cryptonight::hash;
+use cryptonight::aes;
+
 #[derive(PartialEq, Debug, Clone)]
 pub struct Hash256 {
     data: [u8; 32]
@@ -75,6 +78,10 @@ pub fn cn_fast_hash(data: &[u8]) -> Hash256 {
     let mut hash = Hash256::null_hash();
     hash.data.copy_from_slice(&Keccak256Full::digest(data)[..32]);
     hash
+}
+
+pub fn cn_slow_hash(data: &[u8]) {
+
 }
 
 #[cfg(test)]
