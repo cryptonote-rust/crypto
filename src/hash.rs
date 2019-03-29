@@ -1,7 +1,8 @@
 use std::fmt;
 
 use sha3::{Digest, Keccak256Full};
-
+use std::convert::{TryInto};
+use cryptonight::aes::{AESSupport};
 use cryptonight::hash;
 use cryptonight::aes;
 
@@ -80,8 +81,15 @@ pub fn cn_fast_hash(data: &[u8]) -> Hash256 {
     hash
 }
 
-pub fn cn_slow_hash(data: &[u8]) {
-
+pub fn cn_slow_hash(data: &[u8], version: hash::HashVersion) -> Hash256 {
+  let aes = aes::new(AESSupport::HW);
+  let cn_hash = hash::hash_alloc_scratchpad(&data[0..], &aes, version);
+  let (data, _) = cn_hash.as_bytes().split_at(32);
+  assert!(data.len() == 32);
+  let data: [u8; 32] = data.try_into().unwrap();
+  let mut hash = Hash256::null_hash();
+  hash.data.copy_from_slice(&data[0..]);
+  hash
 }
 
 #[cfg(test)]
@@ -112,5 +120,15 @@ mod tests {
     fn errors_on_invalid_input() {
         assert!(Hash256::from("01").is_err());
         assert!(Hash8::from("01111111111111111111111111111111111111").is_err());
+    }
+
+    #[test] 
+    fn should_test_fast_hash() {
+
+    }
+
+    #[test] 
+    fn should_test_slow_hash() {
+        
     }
 }

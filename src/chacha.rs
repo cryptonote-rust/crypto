@@ -1,20 +1,18 @@
 use cryptonight::hash;
 use cryptonight::aes;
 use cryptonight::aes::{AESSupport};
-use cryptonight::byte_string;
-
-use std::convert::{TryFrom, TryInto};
+use std::convert::{TryInto};
 
 const CHACHA_KEY_SIZE:usize =  32;
 const CHACHA_IV_SIZE:usize = 8;
 
 
 pub struct ChachaKey {
-data: [u8; CHACHA_KEY_SIZE],
+  data: [u8; CHACHA_KEY_SIZE],
 }
 
 pub struct ChachaIV {
-data: [u8; CHACHA_IV_SIZE],
+  data: [u8; CHACHA_IV_SIZE],
 }
 
 pub fn generate(password: String) -> ChachaKey {
