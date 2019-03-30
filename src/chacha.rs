@@ -45,7 +45,7 @@ impl Chacha {
     }
   }
   pub fn encrypt(&self, plain: &[u8]) -> Vec<u8>{
-    let mut cipher = vec![];
+    let mut cipher = vec![0; plain.len()];
 
     unsafe {
       chacha8(plain.as_ptr(), plain.len(), self.key.data.as_ptr(), self.iv.data.as_ptr(), cipher.as_mut_ptr());
@@ -82,12 +82,8 @@ mod tests {
     let iv = ChachaIV::new();
     let chacha = Chacha::new(key, iv);
     let plain = *b"hello world!";
-    println!("Plain text = {:?}", plain);
     let cipher = chacha.encrypt(&plain[..]);
-    // getCipher(&chacha, plain.to_vec());
-    println!("chiper text = {:?}", cipher);
-    let cipher = chacha.encrypt(&plain[..]);
-    // getCipher(&chacha, plain.to_vec());
-    println!("chiper text = {:?}", cipher);
+    let cipher1 = chacha.encrypt(&cipher[..]);
+    assert!(plain == cipher1.as_slice());
   }
 }

@@ -141,6 +141,40 @@ mod tests {
 
     let a = byte_string::string_to_u8_array("0707cff699d605f7eb4dbdcad3a38b462b52e9b8ecdf06fb4c95bc5b058a177f84d327f27db739430000000363862429fb90c0fc35fcb9f760c484c8532ee5f2a7cbea4e769d44cd12a7f201");
     let hash = cn_slow_hash(&a[0..], hash::HashVersion::Version7);
-    println!("{:#x?}", hash);
+    assert!(hash.data == [
+        0x61,
+        0x30,
+        0x31,
+        0x65,
+        0x33,
+        0x36,
+        0x39,
+        0x39,
+        0x32,
+        0x37,
+        0x62,
+        0x39,
+        0x30,
+        0x65,
+        0x31,
+        0x31,
+        0x64,
+        0x32,
+        0x31,
+        0x35,
+        0x39,
+        0x61,
+        0x38,
+        0x35,
+        0x63,
+        0x65,
+        0x64,
+        0x63,
+        0x30,
+        0x66,
+        0x65,
+        0x64
+    ]
+);
   }
 }

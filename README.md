@@ -7,15 +7,28 @@
 
 # Usage
 
-1. Generate chacha key.
+1. Cryptonote Chacha8 functions.
 
+
+a. Generate ChachaKey
+```
+use cryptonote_crypto::chacha::{ChachaKey};
+let key = ChachaKey::generate(String::from(""));
+let key = ChachaKey::generate(String::from("your password"));
 ```
 
-use cryptonote_crypto::chacha;
+b. Generate Chacha
+```
+    let iv = ChachaIV::new();
+    let chacha = Chacha::new(key, iv);
+```
 
-let password = "your password";
-
-let key = chacha::generate(passowrd);
+c. Cipher a plaintext
+```
+    let plain = *b"hello world!";
+    let cipher = chacha.encrypt(&plain[..]);
+    let cipher1 = chacha.encrypt(&cipher[..]);
+    assert!(plain == cipher1.as_slice());
 ```
 
 2. Slow Hash
