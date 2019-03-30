@@ -25,12 +25,17 @@ pub struct Chacha {
 }
 
 impl ChachaIV {
-     pub fn new () -> ChachaIV {
+  pub fn new () -> ChachaIV {
     let mut rng = rand::thread_rng();
     let mut data: [u8; CHACHA_IV_SIZE] = [0; CHACHA_IV_SIZE];
-for x in &mut data {
-    *x = rng.gen();
-}
+    for x in &mut data {
+      *x = rng.gen();
+    }
+    ChachaIV {
+      data
+    }
+  }
+  pub fn from (data: [u8; CHACHA_IV_SIZE]) -> ChachaIV {
     ChachaIV {
       data
     }
@@ -80,6 +85,7 @@ mod tests {
     assert!(key1.data == [97, 48, 56, 52, 102, 48, 49, 100, 49, 52, 51, 55, 97, 48, 57, 99, 54, 57, 56, 53, 52, 48, 49, 98, 54, 48, 100, 52, 51, 53, 53, 52]);
     
     let iv = ChachaIV::new();
+    let iv = ChachaIV::from([0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18]);
     let chacha = Chacha::new(key, iv);
     let plain = *b"hello world!";
     let cipher = chacha.encrypt(&plain[..]);
