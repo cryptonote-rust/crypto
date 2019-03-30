@@ -6,6 +6,8 @@ edition = "2018"
 license = "GPL-3.0-or-later"
 description = "Cryptography Primitives for Cryptonote"
 
+build = "src/build.rs"
+
 [dependencies]
 arrayref = "0.3"
 curve25519-dalek = "1"
@@ -13,6 +15,8 @@ hex = "0.3"
 rand = "0.6"
 sha3 = "0.8"
 cryptonight = "0.1.0"
+chacha = "0.1.0"
+cc = "1.0"
 
 [badges]
 travis-ci = { repository = "cryptonote-rust/crypto", branch = "master" }
