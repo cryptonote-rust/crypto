@@ -12,16 +12,16 @@ extern {
 }
 
 pub struct ChachaKey {
-  data: [u8; CHACHA_KEY_SIZE],
+  pub data: [u8; CHACHA_KEY_SIZE],
 }
 
 pub struct ChachaIV {
-  data: [u8; CHACHA_IV_SIZE],
+  pub data: [u8; CHACHA_IV_SIZE],
 }
 
 pub struct Chacha {
-  key: ChachaKey,
-  iv: ChachaIV,
+  pub key: ChachaKey,
+  pub iv: ChachaIV,
 }
 
 impl ChachaIV {
